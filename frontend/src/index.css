@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    background: #f3f5f9;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.08), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(176, 137, 104, 0.1), transparent 34%),
+        #f3f5f9;
+    color: #172033;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    overflow-x: hidden;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+button,
+a,
+input,
+select,
+textarea {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+::selection {
+    background: #bae6fd;
+    color: #1e3a5f;
+}
+
+/* ----------------------------- */
+/* Professional Auth Inputs      */
+/* ----------------------------- */
+
+.auth-input {
+    width: 100%;
+    border-radius: 1rem;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 0.875rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #334155;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+.auth-input::placeholder {
+    color: #94a3b8;
+}
+
+.auth-input:hover {
+    border-color: #cbd5e1;
+    background: #ffffff;
+}
+
+.auth-input:focus {
+    border-color: #7dd3fc;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(186, 230, 253, 0.75);
+}
+
+.auth-input:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* ----------------------------- */
+/* Scrollbar                     */
+/* ----------------------------- */
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #eef2f7;
+}
+
+body {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #eef2f7;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #eef2f7;
+}
+
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eef2f7;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #94a3b8, #64748b);
+    border: 2px solid #eef2f7;
+    border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #38bdf8, #1e3a5f);
+}
+
+.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #f8fafc;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f8fafc;
+    border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border: 1px solid #f8fafc;
+    border-radius: 999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #38bdf8;
+}
+
+.hide-scrollbar {
+    scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* ----------------------------- */
+/* Reusable Micro Animations     */
+/* ----------------------------- */
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes soft-pulse {
+    0%,
+    100% {
+        opacity: 0.65;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.04);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-18px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-slide-down {
+    animation: slide-down 0.28s ease-out both;
+}
+
+.animate-soft-pulse {
+    animation: soft-pulse 3s ease-in-out infinite;
+}
+
+.animate-slide-up {
+    animation: slide-up 0.35s ease-out both;
+}
+
+/* ----------------------------- */
+/* Utility Polish                */
+/* ----------------------------- */
+
+.auth-shell {
+    min-height: calc(100vh - 5rem);
+}
+
+.focus-clean:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(186, 230, 253, 0.65);
+}
