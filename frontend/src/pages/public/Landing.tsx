@@ -9,11 +9,9 @@ import {
     Globe2,
     Layers3,
     MessageSquareText,
-    ShieldCheck,
     Sparkles,
     Trophy,
     UploadCloud,
-    UsersRound,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -32,7 +30,7 @@ export default function Landing() {
                     <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-24">
                         <div className="flex flex-col justify-center">
                             <div className="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-sky-200">
-                                <Sparkles size={15} />
+                                <Sparkles className="h-4 w-4" />
                                 Recruiter Intelligence Platform
                             </div>
 
@@ -52,7 +50,7 @@ export default function Landing() {
                                     className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#7A5A47] bg-[#B08968] px-6 py-3.5 text-sm font-black text-white shadow-[0_10px_28px_rgba(176,137,104,0.3)] transition hover:-translate-y-0.5 hover:bg-sky-500"
                                 >
                                     Start Hiring
-                                    <ArrowRight size={18} />
+                                    <ArrowRight className="h-[18px] w-[18px]" />
                                 </Link>
 
                                 <Link
@@ -287,7 +285,7 @@ export default function Landing() {
                                     className="inline-flex items-center justify-center gap-2 rounded-2xl bg-[#B08968] px-6 py-3.5 text-sm font-black text-white transition hover:-translate-y-0.5 hover:bg-sky-500"
                                 >
                                     Get Started
-                                    <ArrowRight size={18} />
+                                    <ArrowRight className="h-[18px] w-[18px]" />
                                 </Link>
                                 <Link
                                     to="/login"
@@ -309,83 +307,169 @@ export default function Landing() {
 function TrustPill({ text }: { text: string }) {
     return (
         <div className="flex items-center gap-2 rounded-2xl border border-white/10 bg-white/10 px-4 py-3 text-xs font-bold text-slate-200">
-            <CheckCircle2 size={15} className="text-sky-300" />
+            <CheckCircle2 className="h-[15px] w-[15px] text-sky-300" />
             {text}
         </div>
     );
 }
 
-function DemoRow({ label, value, status }: { label: string; value: string; status: string }) {
+function DemoRow({
+    label,
+    value,
+    status,
+}: {
+    label: string;
+    value: string;
+    status: string;
+}) {
     return (
         <div className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 sm:grid-cols-[110px_1fr_88px] sm:items-center">
-            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">{label}</p>
-            <p className="min-w-0 text-sm font-bold text-slate-700">{value}</p>
-            <p className="rounded-full bg-sky-50 px-3 py-1 text-center text-xs font-black text-sky-700">{status}</p>
+            <p className="text-xs font-black uppercase tracking-[0.16em] text-slate-400">
+                {label}
+            </p>
+            <p className="min-w-0 text-sm font-bold text-slate-700">
+                {value}
+            </p>
+            <p className="rounded-full bg-sky-50 px-3 py-1 text-center text-xs font-black text-sky-700">
+                {status}
+            </p>
         </div>
     );
 }
 
-function StatCard({ label, value, icon }: { label: string; value: string; icon: React.ReactNode }) {
+function StatCard({
+    label,
+    value,
+    icon,
+}: {
+    label: string;
+    value: string;
+    icon: React.ReactElement<{ className?: string }>;
+}) {
     return (
         <div className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
             <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-600">
-                {React.cloneElement(icon as React.ReactElement, { size: 24 })}
+                {React.cloneElement(icon, {
+                    className: "h-6 w-6",
+                })}
             </div>
-            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">{label}</p>
-            <p className="mt-2 text-2xl font-black text-[#1E3A5F]">{value}</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                {label}
+            </p>
+            <p className="mt-2 text-2xl font-black text-[#1E3A5F]">
+                {value}
+            </p>
         </div>
     );
 }
 
-function PhotoCard({ src, title, text }: { src: string; title: string; text: string }) {
+function PhotoCard({
+    src,
+    title,
+    text,
+}: {
+    src: string;
+    title: string;
+    text: string;
+}) {
     return (
         <div className="group overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
             <div className="h-56 overflow-hidden">
-                <img src={src} alt={title} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+                <img
+                    src={src}
+                    alt={title}
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                />
             </div>
             <div className="p-6">
-                <h3 className="text-xl font-black text-[#1E3A5F]">{title}</h3>
-                <p className="mt-2 text-sm font-medium leading-relaxed text-slate-500">{text}</p>
+                <h3 className="text-xl font-black text-[#1E3A5F]">
+                    {title}
+                </h3>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-slate-500">
+                    {text}
+                </p>
             </div>
         </div>
     );
 }
 
-function HowStep({ step, icon, title, text }: { step: string; icon: React.ReactNode; title: string; text: string }) {
+function HowStep({
+    step,
+    icon,
+    title,
+    text,
+}: {
+    step: string;
+    icon: React.ReactElement<{ className?: string }>;
+    title: string;
+    text: string;
+}) {
     return (
         <div className="rounded-[2rem] border border-slate-200 bg-slate-50 p-6">
             <div className="flex items-center justify-between">
                 <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#313C4E] text-sky-300">
-                    {React.cloneElement(icon as React.ReactElement, { size: 24 })}
+                    {React.cloneElement(icon, {
+                        className: "h-6 w-6",
+                    })}
                 </div>
-                <span className="text-4xl font-black text-slate-200">{step}</span>
+                <span className="text-4xl font-black text-slate-200">
+                    {step}
+                </span>
             </div>
-            <h3 className="mt-6 text-xl font-black text-[#1E3A5F]">{title}</h3>
-            <p className="mt-3 text-sm font-medium leading-relaxed text-slate-500">{text}</p>
+            <h3 className="mt-6 text-xl font-black text-[#1E3A5F]">
+                {title}
+            </h3>
+            <p className="mt-3 text-sm font-medium leading-relaxed text-slate-500">
+                {text}
+            </p>
         </div>
     );
 }
 
-function FeaturePanel({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) {
+function FeaturePanel({
+    icon,
+    title,
+    text,
+}: {
+    icon: React.ReactElement<{ className?: string }>;
+    title: string;
+    text: string;
+}) {
     return (
         <div className="relative overflow-hidden rounded-[2.5rem] border border-slate-200 bg-white p-8 shadow-sm">
             <div className="absolute -right-16 -top-16 h-48 w-48 rounded-full bg-sky-100 blur-3xl" />
             <div className="relative">
                 <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-[#E6D8C8] bg-[#F7F0E8] text-[#7A5A47]">
-                    {React.cloneElement(icon as React.ReactElement, { size: 30 })}
+                    {React.cloneElement(icon, {
+                        className: "h-7 w-7",
+                    })}
                 </div>
-                <h3 className="text-2xl font-black text-[#1E3A5F]">{title}</h3>
-                <p className="mt-4 text-sm font-medium leading-relaxed text-slate-500">{text}</p>
+                <h3 className="text-2xl font-black text-[#1E3A5F]">
+                    {title}
+                </h3>
+                <p className="mt-4 text-sm font-medium leading-relaxed text-slate-500">
+                    {text}
+                </p>
             </div>
         </div>
     );
 }
 
-function ReasonCard({ title, text }: { title: string; text: string }) {
+function ReasonCard({
+    title,
+    text,
+}: {
+    title: string;
+    text: string;
+}) {
     return (
         <div className="rounded-[1.5rem] border border-white/10 bg-white/10 p-5">
-            <h3 className="text-lg font-black text-white">{title}</h3>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-slate-300">{text}</p>
+            <h3 className="text-lg font-black text-white">
+                {title}
+            </h3>
+            <p className="mt-2 text-sm font-medium leading-relaxed text-slate-300">
+                {text}
+            </p>
         </div>
     );
 }
