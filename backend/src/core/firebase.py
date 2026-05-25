@@ -1,21 +1,67 @@
+import os
+
 import firebase_admin
-from firebase_admin import credentials, auth
+from firebase_admin import auth, credentials
+
 from src.core.config import settings
 
 
 def initialize_firebase():
     if firebase_admin._apps:
-        return
+        return True
 
-    cred = credentials.Certificate(settings.FIREBASE_SERVICE_ACCOUNT_PATH)
-    firebase_admin.initialize_app(cred)
+    firebase_path = (
+        settings.FIREBASE_SERVICE_ACCOUNT_PATH
+    )
 
-    print("✅ Firebase Admin initialized")
+    if (
+        not firebase_path
+        or not os.path.exists(firebase_path)
+    ):
+        print(
+            "⚠️ Firebase service account file not found. "
+            "Skipping Firebase initialization."
+        )
+        return False
+
+    cred = credentials.Certificate(
+        firebase_path
+    )
+
+    firebase_admin.initialize_app(
+        cred
+    )
+
+    print(
+        "✅ Firebase Admin initialized"
+    )
+
+    return True
 
 
-def verify_firebase_token(id_token: str):
+def verify_firebase_token(
+    id_token: str,
+):
     try:
-        decoded_token = auth.verify_id_token(id_token)
+        if not firebase_admin._apps:
+            initialized = (
+                initialize_firebase()
+            )
+
+            if not initialized:
+                return None
+
+        decoded_token = (
+            auth.verify_id_token(
+                id_token
+            )
+        )
+
         return decoded_token
-    except Exception:
+
+    except Exception as error:
+        print(
+            f"⚠️ Firebase token verification failed: {error}"
+        )
+
         return None
