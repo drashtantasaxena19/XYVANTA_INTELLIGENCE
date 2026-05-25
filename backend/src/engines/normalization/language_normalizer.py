@@ -1,5 +1,10 @@
 from deep_translator import GoogleTranslator
-from langdetect import detect
+
+try:
+    from langdetect import detect
+except ImportError:
+    def detect(text: str) -> str:
+        return "en"
 
 
 LANGUAGE_MAP = {
@@ -18,7 +23,10 @@ LANGUAGE_MAP = {
 }
 
 
-def safe_translate_to_english(text: str, detected_language: str) -> str:
+def safe_translate_to_english(
+    text: str,
+    detected_language: str,
+) -> str:
     if not text:
         return ""
 
@@ -40,27 +48,40 @@ def safe_translate_to_english(text: str, detected_language: str) -> str:
     return text
 
 
-def normalize_multilingual_text(text: str) -> dict:
-    cleaned = text.replace("\x00", " ").strip()
+def normalize_multilingual_text(
+    text: str,
+) -> dict:
+    cleaned = (
+        text.replace("\x00", " ")
+        .strip()
+    )
 
-    detected_language = "unknown"
+    detected_language = "en"
 
     try:
-        detected_language = detect(cleaned)
+        if cleaned:
+            detected_language = detect(
+                cleaned,
+            )
     except Exception:
-        pass
+        detected_language = "en"
 
-    english_text = safe_translate_to_english(
-        cleaned,
-        detected_language,
+    english_text = (
+        safe_translate_to_english(
+            cleaned,
+            detected_language,
+        )
     )
 
     return {
         "original_text": cleaned,
         "english_text": english_text,
-        "detected_language": detected_language,
-        "language_name": LANGUAGE_MAP.get(
+        "detected_language":
             detected_language,
-            detected_language,
-        ),
+
+        "language_name":
+            LANGUAGE_MAP.get(
+                detected_language,
+                detected_language,
+            ),
     }
